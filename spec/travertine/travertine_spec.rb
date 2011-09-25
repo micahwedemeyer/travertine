@@ -6,7 +6,13 @@ describe Travertine do
   let(:kensing_512) { load_test_image('kensing_512.jpeg') }
   let(:kensing_256) { load_test_image('kensing_256.jpeg') }
   let(:kensing_2048) { load_test_image('kensing_2048.jpeg') }
-  let(:kensing_tile) { load_test_image('kensing_tile_2_0_2.jpeg') }
+  let(:kensing_tile_2_0_2) { load_test_image('kensing_tile_2_0_2.jpeg') }
+
+  describe "#cut_tile" do
+    it "should cut the tile" do
+      Travertine.cut_tile(kensing, 0, 2).should be_same_image_as(kensing_tile_2_0_2)
+    end
+  end
 
   describe "#zoom_image_size" do
     it "should calculate the size in pixels that the source image must be resized to" do

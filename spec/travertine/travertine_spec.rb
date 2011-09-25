@@ -14,6 +14,19 @@ describe Travertine do
     end
   end
 
+  describe "#tile_coordinates_for_zoom" do
+    it "should calculate all the x,y pairs for a given zoom" do
+      Travertine.tile_coordinates_for_zoom(1).should == [[0,0]]
+      Travertine.tile_coordinates_for_zoom(2).should =~ [[0,0], [0,1], [1,0], [1,1]]
+
+      Travertine.tile_coordinates_for_zoom(3).size.should == 16
+      Travertine.tile_coordinates_for_zoom(3)[0..4].should =~ [[0,0], [0,1], [0,2], [0,3], [1,0]]
+
+      Travertine.tile_coordinates_for_zoom(5).size.should == 256
+      Travertine.tile_coordinates_for_zoom(5)[16..20].should =~ [[1,0], [1,1], [1,2], [1,3], [1,4]]
+    end
+  end
+
   describe "#zoom_image_size" do
     it "should calculate the size in pixels that the source image must be resized to" do
       Travertine.zoom_image_size(1).should == Travertine::DEFAULT_TILE_SIZE

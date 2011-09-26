@@ -3,6 +3,21 @@ class Travertine
   # This is the correct size for Google maps tiles
   DEFAULT_TILE_SIZE = 256
 
+  def self.cut_tiles(img, max_zoom, tile_size = DEFAULT_TILE_SIZE)
+    tile_sets = []
+    (0..max_zoom).collect.reverse.each do |zoom|
+      tiles = []
+      resize_to_zoom_level(img, zoom, tile_size)
+      tile_coordinates_for_zoom(zoom).each do |x,y|
+        tiles << cut_tile(img, x, y, tile_size)
+      end
+
+      tile_sets << tiles
+    end
+
+    tile_sets.reverse
+  end
+
   def self.cut_tile(img, x, y, tile_size = DEFAULT_TILE_SIZE)
     tile = Magick::Image.new(tile_size, tile_size)
 
@@ -14,8 +29,8 @@ class Travertine
 
   def self.tile_coordinates_for_zoom(zoom_level)
     [].tap do |coords|
-      (0..((2 ** (zoom_level - 1)) - 1)).each do |x|
-        (0..((2 ** (zoom_level - 1)) - 1)).each do |y|
+      (0..((2 ** zoom_level) - 1)).each do |x|
+        (0..((2 ** zoom_level) - 1)).each do |y|
           coords << [x,y]
         end
       end
@@ -28,6 +43,6 @@ class Travertine
   end
 
   def self.zoom_image_size(zoom_level, tile_size = DEFAULT_TILE_SIZE)
-    tile_size * (2 ** (zoom_level - 1))
+    tile_size * (2 ** zoom_level )
   end
 end

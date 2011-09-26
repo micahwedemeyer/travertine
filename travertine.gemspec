@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{travertine}
-  s.version = "0.1.0"
+  s.version = "0.2.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Micah Wedemeyer"]
@@ -25,8 +25,15 @@ Gem::Specification.new do |s|
     "Rakefile",
     "VERSION",
     "lib/travertine.rb",
+    "spec/data/images/kensing.jpeg",
+    "spec/data/images/kensing_2048.jpeg",
+    "spec/data/images/kensing_256.jpeg",
+    "spec/data/images/kensing_512.jpeg",
+    "spec/data/images/kensing_defaced.jpeg",
+    "spec/data/images/kensing_tile_2_0_2.jpeg",
     "spec/spec_helper.rb",
-    "spec/travertine/travertine_spec.rb"
+    "spec/travertine/travertine_spec.rb",
+    "travertine.gemspec"
   ]
   s.homepage = %q{http://github.com/micahwedemeyer/travertine}
   s.licenses = ["MIT"]

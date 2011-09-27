@@ -1,0 +1,41 @@
+h1. travertine
+
+Travertine (named for the tile) is a library for cutting images into square tiles used for map display. The map tiling algorithm is based on the "YM4R":http://rubyforge.org/projects/ym4r/ project.
+
+h2. Example
+
+<pre>
+image = Magick::ImageList.new("mymap.jpg")
+zoom_levels = 3
+
+tile_sets = Travertine.cut_tiles(image, zoom_levels)
+
+tile_sets.each_with_index do |tile_set, zoom|
+  coordinates = Travertine.tile_coordinates_for_zoom(zoom)
+  tile_set.each_with_index do |tile, i|
+    # Writes each tile out to a file named like 'tile_zoom_x_y.jpg'
+    tile.write("tile_#{zoom}_#{coordinates[i][0]}_#{coordinates[i][1]}.jpg")
+  end
+end
+</pre>
+
+
+h2. Todo
+
+* Crop and/or autofill source image to make it square prior to tiling
+* Allow for stitching together multiple source images
+
+h2. Contributing to travertine
+
+* Check out the latest master to make sure the feature hasn't been implemented or the bug hasn't been fixed yet
+* Check out the issue tracker to make sure someone already hasn't requested it and/or contributed it
+* Fork the project
+* Start a feature/bugfix branch
+* Commit and push until you are happy with your contribution
+* Make sure to add tests for it. This is important so I don't break it in a future version unintentionally.
+* Please try not to mess with the Rakefile, version, or history. If you want to have your own version, or is otherwise necessary, that is fine, but please isolate to its own commit so I can cherry-pick around it.
+
+h4. Copyright
+
+Copyright (c) 2011 Micah Wedemeyer. See LICENSE.txt for
+further details.

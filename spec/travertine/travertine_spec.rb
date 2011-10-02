@@ -40,6 +40,14 @@ describe Travertine do
     end
   end
 
+  describe "#tile_count_for_zoom" do
+    it "should calculate the number of tiles for a given zoom level" do
+      Travertine.tile_count_for_zoom(0).should == 1
+      Travertine.tile_count_for_zoom(2).should == 16
+      Travertine.tile_count_for_zoom(4).should == 256
+    end
+  end
+
   describe "#zoom_image_size" do
     it "should calculate the size in pixels that the source image must be resized to" do
       Travertine.zoom_image_size(0).should == Travertine::DEFAULT_TILE_SIZE

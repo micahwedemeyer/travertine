@@ -68,6 +68,19 @@ class Travertine
     end
   end
 
+  # Calculates the total tile count for a given zoom level.
+  #
+  # Parameters:
+  #
+  # <tt>zoom_level</tt>: The level of zoom to compute the tile grid for.
+  #
+  # Returns:
+  #
+  # An +Integer+ count of the number of tiles for a given zoom level.
+  def self.tile_count_for_zoom(zoom_level)
+    4 ** zoom_level
+  end
+
   # Resizes the image to the correct size for cutting tiles at the given zoom level. It does an in-place resize which modifies the passed-in image.
   #
   # Note: If the image is not square, tiles will probably be incorrect.
